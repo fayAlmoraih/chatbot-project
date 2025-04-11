@@ -26,6 +26,7 @@ load_dotenv()
 
 keyVaultName = "mychatbotvault"
 KVUri = f"https://{keyVaultName}.vault.azure.net"
+keyVaultName = os.getenv("KEY_VAULT_NAME")
 
 credential = DefaultAzureCredential()
 client = SecretClient(vault_url = f"https://{KEY_VAULT_NAME}.vault.azure.net/", credential=credential)
