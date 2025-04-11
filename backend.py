@@ -24,8 +24,8 @@ import chromadb
 
 load_dotenv()
 
-keyVaultName = os.environ["KEY_VAULT_NAME"]
-KVUri = f"https://{keyVaultName}.vault.azure.net"
+keyVaultName = "mychatbotvault"
+KVUri = f"https://{keyVaultName}.vault.azure.net""
 
 credential = DefaultAzureCredential()
 client = SecretClient(vault_url=KVUri, credential=credential)
@@ -75,6 +75,9 @@ storage_resource_uri = storage_account_sas_url.split('?')[0]
 token = storage_account_sas_url.split('?')[1]
 
 app = FastAPI()
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 # Request models
 class ChatRequest(BaseModel):
