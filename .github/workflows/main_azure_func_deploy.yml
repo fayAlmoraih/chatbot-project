@@ -24,14 +24,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Create zip of Azure Function app
-        run: |
-          cd azure-function
-          zip -r functionapp.zip .
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure Function App using Zip Deploy
+      - name: Deploy to Azure Function App
         uses: Azure/functions-action@v1
         with:
           app-name: sda-bootcamp-func
-          package: ./azure-function/functionapp.zip
-          publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
+          package: ./azure-function
